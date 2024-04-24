@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageScaler", "ImageScaler\ImageScaler.csproj", "{0887F447-85AF-4EC8-A7B4-C232754A703B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0887F447-85AF-4EC8-A7B4-C232754A703B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0887F447-85AF-4EC8-A7B4-C232754A703B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0887F447-85AF-4EC8-A7B4-C232754A703B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0887F447-85AF-4EC8-A7B4-C232754A703B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C4A21C09-9A86-4F7B-BBA9-2302257F1C40}
+	EndGlobalSection
+EndGlobal
