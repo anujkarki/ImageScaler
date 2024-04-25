@@ -1,10 +1,5 @@
 ﻿using ImageScaler.Models;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ImageScaler.Reader
 {
@@ -26,15 +21,17 @@ namespace ImageScaler.Reader
 
         public FileDataModel ReadImage(string filePath)
         {
-            if (!File.Exists(filePath))
+            string fullPath = Path.Combine(BasePath, filePath);
+
+            if (!File.Exists(fullPath))
                 throw new Exception("File Not Found");
 
             // Determine the content type based on the file extension
-            string ImageName = Path.GetFileName(filePath);
+            string ImageName = Path.GetFileName(fullPath);
             string contentType = GetContentType(ImageName);
             byte[] imageBytes;
 
-            using (Image image = Image.FromFile(filePath))
+            using (Image image = Image.FromFile(fullPath))
             {
                 if (Width > 0 && Height > 0)
                 {
