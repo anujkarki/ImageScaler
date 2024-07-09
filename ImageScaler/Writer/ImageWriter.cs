@@ -5,6 +5,7 @@ namespace ImageScaler.Writer
 {
     public class ImageWriter
     {
+        public string[] PermittedExtensions { get; private set; } = { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff" };
         public string BasePath { get; } = string.Empty;
         public string SaveDirectory { get; set; } = string.Empty;
         public string TempPath { get; set; } = string.Empty;
@@ -24,22 +25,39 @@ namespace ImageScaler.Writer
             }
         }
 
+        public void UpdatePermittedExtensions(string[] NewPermittedExtensions)
+        {
+            PermittedExtensions = NewPermittedExtensions;
+        }
+
         public void SaveImage(Stream imageStream, string fileName)
         {
             OriginalFileName = fileName;
             if (imageStream == null)
                 throw new Exception("Stream cannot be Null");
+            // Check the file extension
+            var extension = Path.GetExtension(fileName).ToLowerInvariant();
+            if (string.IsNullOrEmpty(extension) || Array.IndexOf(PermittedExtensions, extension) < 0)
+            {
+                throw new Exception("Invalid File Extension");
+            }
 
             SaveImage(imageStream);
         }
 
         public void SaveImage(string filePath)
         {
-
-            OriginalFileName = Path.GetFileName(filePath);
-            if (!File.Exists(filePath))
+            if (string.IsNullOrEmpty(filePath) || !File.Exists(filePath))
+            {
                 throw new Exception("File Not Found");
-
+            }
+            // Check the file extension
+            var extension = Path.GetExtension(filePath).ToLowerInvariant();
+            if (string.IsNullOrEmpty(extension) || Array.IndexOf(PermittedExtensions, extension) < 0)
+            {
+                throw new Exception("Invalid File Extension");
+            }
+            OriginalFileName = Path.GetFileName(filePath);
             SaveImage(File.OpenRead(filePath));
         }
 
@@ -55,6 +73,7 @@ namespace ImageScaler.Writer
                     fileStream.CopyTo(outputStream);
                 }
                 ImageOptimizer.CompressImage(tempFilePath, OutputFilePath);
+                DeleteTempFile(tempFilePath);
             }
             else
             {
@@ -134,6 +153,14 @@ namespace ImageScaler.Writer
                 result.Append(chars[random.Next(chars.Length)]);
             }
             return result.ToString();
+        }
+
+        private void DeleteTempFile(string fileName)
+        {
+            if(File.Exists(fileName))
+            {
+                File.Delete(fileName);
+            }
         }
     }
 }
