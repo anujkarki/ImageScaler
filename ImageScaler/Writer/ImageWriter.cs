@@ -100,8 +100,9 @@ namespace ImageScaler.Writer
 
         private void CreateSubDirectories(string DirPath)
         {
-            var subDirectories = DirPath.Split("\\");
-            var subDirectoryPath = string.Empty;
+            var subDirPath = DirPath.Substring(BasePath.Length);
+            var subDirectories = subDirPath.Split("\\");
+            var subDirectoryPath = BasePath;
             foreach (var dirName in subDirectories)
             {
                 subDirectoryPath = Path.Combine(subDirectoryPath, dirName);
